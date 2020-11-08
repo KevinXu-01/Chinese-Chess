@@ -1,0 +1,12 @@
+E:\Visual Studio Projects\Chinese Chess\bin\x86\Debug\Chinese Chess.exe.config
+E:\Visual Studio Projects\Chinese Chess\bin\x86\Debug\Chinese Chess.exe
+E:\Visual Studio Projects\Chinese Chess\bin\x86\Debug\Chinese Chess.pdb
+E:\Visual Studio Projects\Chinese Chess\bin\x86\Debug\LAN_connection.dll
+E:\Visual Studio Projects\Chinese Chess\obj\x86\Debug\Chinese Chess.csprojAssemblyReference.cache
+E:\Visual Studio Projects\Chinese Chess\obj\x86\Debug\Chinese_Chess.MainWnd.resources
+E:\Visual Studio Projects\Chinese Chess\obj\x86\Debug\Chinese_Chess.Properties.Resources.resources
+E:\Visual Studio Projects\Chinese Chess\obj\x86\Debug\Chinese Chess.csproj.GenerateResource.cache
+E:\Visual Studio Projects\Chinese Chess\obj\x86\Debug\Chinese Chess.csproj.CoreCompileInputs.cache
+E:\Visual Studio Projects\Chinese Chess\obj\x86\Debug\Chinese Chess.csproj.CopyComplete
+E:\Visual Studio Projects\Chinese Chess\obj\x86\Debug\Chinese Chess.exe
+E:\Visual Studio Projects\Chinese Chess\obj\x86\Debug\Chinese Chess.pdb
