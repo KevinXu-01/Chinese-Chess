@@ -19,7 +19,10 @@ namespace Chinese_Chess
 
             try
             {
-                MainWnd.arg = "0";//用一个字符串来接收大厅传过来的数据
+                if (args.Length == 0)
+                    MainWnd.arg = "0";
+                else
+                    MainWnd.arg = args[0];//用一个字符串来接收大厅传过来的数据
                 Application.Run(new MainWnd());
             }
             catch (Exception ex)

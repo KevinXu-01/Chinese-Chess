@@ -57,7 +57,7 @@ namespace Chinese_Chess
         private void Connect_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!isClicked)
-                Application.Exit();
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
         private void Connect_Click(object sender, EventArgs e)

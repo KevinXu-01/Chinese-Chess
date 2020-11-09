@@ -202,7 +202,7 @@ namespace Chinese_Chess
         {
             MouseEventArgs mouse = (MouseEventArgs)e;
             if (mouse.X >= 1874 && mouse.Y <= 45)
-                Application.Exit();
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
             if (MousePosition.X >= 1719 && MousePosition.X <= 1764 && MousePosition.Y <= 45)
             {
                 WindowState = FormWindowState.Minimized;
@@ -241,9 +241,14 @@ namespace Chinese_Chess
 
             if (MousePosition.X >= 1730 && MousePosition.X <= 1881 && MousePosition.Y >= 430 && MousePosition.Y <= 480)
             {
-                if (mode != 1)
+                if (mode == 0)
                 {
                     Undo();
+                    return;
+                }
+                else if(mode == 2)
+                {
+                    MessageBox.Show("当前模式不支持此操作！");
                     return;
                 }
                 else if (mode == 1 && player != CurrentPlayer)
@@ -427,7 +432,7 @@ namespace Chinese_Chess
                 //显示提示确认框
                 if (mode != 1)
                 {
-                    if (MessageBox.Show("你是否需要悔棋？", "确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (MessageBox.Show("您是否需要悔棋？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         //取出_stepList的最后一步走棋步骤到lastStep中
                         Step lastStep = _stepList[_stepList.Count - 1];
@@ -436,7 +441,9 @@ namespace Chinese_Chess
                         CurrentPlayer = lastStep._Player;
                         ChessBoard[lastStep._PickRow, lastStep._PickCol] = lastStep._PickChess;
                         ChessBoard[lastStep._DropRow, lastStep._DropCol] = lastStep._DropChess;
-
+                        game_info.Text += Convert.ToString(CurrentPlayer) + "方进行了悔棋，将棋子" +
+                            Convert.ToString(lastStep._PickChess) + "还原到(" + Convert.ToString(_pickRow) + ", " +
+                            Convert.ToString(_pickCol) + ")。\n";
                         //删除_stepList的最后一步走棋步骤
                         _stepList.RemoveAt(_stepList.Count - 1);
 
@@ -457,7 +464,6 @@ namespace Chinese_Chess
                             _dropRow = lastStep._DropRow;
                             _dropCol = lastStep._DropCol;
                         }
-
                         //强制刷新
                         Invalidate();
                     }
@@ -1083,6 +1089,7 @@ namespace Chinese_Chess
 
             if (row == _pickRow && col == _pickCol)
                 canDrop = false;
+
         }
 
 
@@ -1144,9 +1151,10 @@ namespace Chinese_Chess
                 GameOn(8, 7);
                 return;
             }
-            ////计算出来后直接调用GameOn函数
+            //计算出来后直接调用GameOn函数
             isCopied = false;
             Step step = GenerateOneMove();
+            //进行维护
             GameOn(step._PickRow, step._PickCol);
             GameOn(step._DropRow, step._DropCol);
         }
@@ -1185,7 +1193,9 @@ namespace Chinese_Chess
                             for (int m = 1; m <= 9; m++)
                             {
                                 _CanDrop(ChessBoard_temp[i, j], i, j, k, m, out bool canDrop);
-                                if (canDrop)
+                                if (canDrop && 
+                                    (ChessBoard_temp[k, m] == Piece.无子 || 
+                                    ChessBoard_temp[k, m].ToString().IndexOf(player.ToString()) == 0))
                                 {
                                     Step step = new Step();
 
